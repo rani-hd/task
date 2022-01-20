@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -10,19 +13,24 @@ export class SignupComponent implements OnInit {
   username: string = '';
   email: string = '';
   password: string = '';
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AngularFireAuth,private router:Router) {}
 
   ngOnInit(): void {}
 
+  
   signUp() {
-    const data = {
-      name: this.name,
-      username: this.username,
-      email: this.email,
-      password: this.password
-    };
+    // const data = {
+    //   name: this.name,
+    //   username: this.username,
+    //   email: this.email,
+    //   password: this.password
+    // };
 
     //console.log('data', data);
-    this.auth.signUp(data);
+    this.auth.createUserWithEmailAndPassword(this.email,this.password).then(data=>{
+      console.log('data',data)
+      this.router.navigate(['login'])
+    })
+
   }
 }

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat/app';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -8,7 +11,7 @@ import { AuthService } from '../auth/auth.service';
 export class LoginComponent implements OnInit {
  username: string = '';
  password: string = '';
-  constructor(private auth: AuthService) { }
+ constructor(private auth: AngularFireAuth,private router:Router) {}
 
   ngOnInit(): void {}
   login() {
@@ -16,7 +19,9 @@ export class LoginComponent implements OnInit {
       username: this.username,
       password: this.password
     };
-    //console.log('data', data);
-    this.auth.login(data);
+    this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(data=>{
+      console.log('data',data)
+      this.router.navigate(['home-page'])
+    })
   }
 }

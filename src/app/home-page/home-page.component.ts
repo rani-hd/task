@@ -7,29 +7,60 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
   isEditable: boolean = false;
-  /*
-  [{
-    textData:"",
-    isEditable:false
-  },{
-    textData:"",
-    isEditable:false
-  },{
-    textData:"",
-    isEditable:false
-  }]
-  
-  */
-  textData:string =""
+  isAddblog: boolean = false;
+  content: string = '';
+  blogdata: string = '';
+  cardData:any = []
   constructor() {}
 
-  ngOnInit(): void {}
-
-  editCard() {
-    this.isEditable = true;
+  ngOnInit(): void {
+    //API Call
+    const storedData = localStorage.getItem('data');
+    if(storedData){
+      this.cardData = JSON.parse(storedData);
+    }
   }
 
-  saveCard() {
-    this.isEditable = false;
+  editCard(content_id:number) {
+    const arr = []
+    for(let data of this.cardData){
+      if(data.content_id === content_id){
+        data.isEditable = true;
+      }
+      arr.push(data)
+    }
+    this.cardData = arr
+  }
+
+  saveCard(content_id:number) {
+    const arr = []
+    for(let data of this.cardData){
+      if(data.content_id === content_id){
+        data.isEditable = false;
+      }
+      arr.push(data)
+    }
+    this.cardData = arr
+    //API Call
+    localStorage.setItem('data',JSON.stringify(this.cardData))
+
+  }
+
+  addBlog() {
+    this.isAddblog = true;
+  }
+
+  saveBlog(){
+    let length = this.cardData.length;
+    
+    this.cardData.push({
+      content:this.blogdata,
+      isEditable:false,
+      content_id:(length+1)
+    })
+    //API Call
+    localStorage.setItem('data',JSON.stringify(this.cardData))
+    this.isAddblog = false;
+    this.blogdata=""
   }
 }
