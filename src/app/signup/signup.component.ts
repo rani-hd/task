@@ -3,32 +3,26 @@ import { AuthService } from '../auth/auth.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 
+interface users {
+  name:string,
+  username:string,
+  email:string,
+  password:string
+}
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
-  name: string = '';
-  username: string = '';
-  email: string = '';
-  password: string = '';
-  constructor(private auth: AngularFireAuth,private router:Router) {}
+  userData:users={name:'',username:'',email:'',password:''}
+  constructor(private auth: AuthService,private router:Router) {}
 
   ngOnInit(): void {}
 
-  
   signUp() {
-    // const data = {
-    //   name: this.name,
-    //   username: this.username,
-    //   email: this.email,
-    //   password: this.password
-    // };
-
-    //console.log('data', data);
-    this.auth.createUserWithEmailAndPassword(this.email,this.password).then(data=>{
-      console.log('data',data)
+    this.auth.signUp(this.userData).then(data=>{
+      this.userData = {name:'',username:'',email:'',password:''}
       this.router.navigate(['login'])
     })
 

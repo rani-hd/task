@@ -1,12 +1,11 @@
 <div class="container">
   <div class="row">
-    <h2>Login</h2>
+    <h2>Login</h2><br>
     <form>
       <label for="username">Username</label>
-      <input  required [(ngModel)]="username" name="username">
+      <input  required [(ngModel)]="userData.username" name="username">
       <label for="password">password</label>
-        <input type="password" required [(ngModel)]="password" name="password">
-      <label for="password">password</label>
+        <input type="password" required [(ngModel)]="userData.password" name="password">
       <button class="btn btn-success" (click)="login()">Login</button>
     </form>
   </div>

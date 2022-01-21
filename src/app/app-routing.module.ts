@@ -6,11 +6,10 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './authguard/auth.guard';
 
 const routes: Routes = [
-// {path:'search',component:SearchComponent,canActivate: [AuthGuard]},
-{path:'home-page',component:HomePageComponent},
+{path:'home-page',component:HomePageComponent,canActivate: [AuthGuard]},
 {path:'singup',component:SignupComponent},
 {path:'login',component:LoginComponent},
-{path:"",redirectTo:'/singup',pathMatch:"full"}];
+{path:"",redirectTo:'/login',pathMatch:"full"}];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
