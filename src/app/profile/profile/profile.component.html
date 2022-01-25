@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="row">
+      <h2>Profile</h2>
+      <form class="formBox">
+        <label for="name">name</label>
+        <input required [(ngModel)]="userData.name" name="name">
+        <label for="username">Username</label>
+        <input required [(ngModel)]="userData.username" name="username">
+        <label for="email">email</label>
+        <input required [(ngModel)]="userData.email" name="email">
+        <label for="password">password</label>
+        <input type="password" required [(ngModel)]="userData.password" name="password">
+        <button class="btn btn-success" (click)="updateProfile()">Update Profile</button>
+      </form>
+    </div>
+  </div>

@@ -3,3 +3,13 @@
     padding: 0;
     margin: 0;
 }
+
+.formBox{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+}
+
+button{
+    margin-top: 1rem;
+}

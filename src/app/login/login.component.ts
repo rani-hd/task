@@ -1,32 +1,54 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
+import firebase from 'firebase/compat/app';
 import { AuthService } from '../auth/auth.service';
 
-interface users {
- username:string,
- password:string
-}
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  userData:users={username:'',password:''}
-  constructor(private auth: AuthService,private router:Router) {}
- 
+  userData: any = {};
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private afg: AngularFireAuth
+  ) {}
+
   ngOnInit(): void {}
 
   login() {
-    this.auth.login(this.userData).then(status=>{
-      debugger
-      if(status){
-          this.router.navigate(['home-page'])
-          this.userData = {username:'',password:''}
-      }else{
-          this.router.navigate(['signup'])
+    let logUser = this.auth.getUser().subscribe((data) => {
+      logUser.unsubscribe();
+      console.log(data);
+      let flag = false;
+      let user: any = {};
+      for (user of data) {
+        if (
+          this.userData.username === user.username &&
+          this.userData.password === user.password
+        ) {
+          flag = true;
+          this.auth.setUserId(this.userData.username);
+          this.userData = {};
+          this.router.navigate(['home-page']);
+        }
       }
+
+      if (flag === false) {
+        console.log('Error: User not found');
+        this.router.navigate(['signup']);
+      }
+    });
+  }
+
+  loginWithGoogle() {
+    this.afg.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((data:any)=>{
+      console.log('login user',data)
+      this.auth.setUserId(data.user.email)
+      this.router.navigate(['home-page']);
     })
-   
   }
 }

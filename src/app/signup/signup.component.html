@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <h2>SignUp</h2>
-    <form>
+    <form class="formBox">
       <label for="name">name</label>
       <input required [(ngModel)]="userData.name" name="name">
       <label for="username">Username</label>
@@ -11,6 +11,7 @@
       <label for="password">password</label>
       <input type="password" required [(ngModel)]="userData.password" name="password">
       <button class="btn btn-success" (click)="signUp()">SignUp</button>
+      <button class="btn btn-success" (click)="signUpWithGoogle()">SignUp with Google</button>
     </form>
   </div>
 </div>

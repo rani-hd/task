@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-home-page',
@@ -6,61 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-page.component.css'],
 })
 export class HomePageComponent implements OnInit {
-  isEditable: boolean = false;
-  isAddblog: boolean = false;
-  content: string = '';
-  blogdata: string = '';
-  cardData:any = []
-  constructor() {}
+  user_id: string = '';
+  constructor(public router: Router, private auth: AuthService) {}
 
   ngOnInit(): void {
-    //API Call
-    const storedData = localStorage.getItem('data');
-    if(storedData){
-      this.cardData = JSON.parse(storedData);
-    }
+    this.user_id = this.auth.getUserId();
   }
-
-  editCard(content_id:number) {
-    const arr = []
-    for(let data of this.cardData){
-      if(data.content_id === content_id){
-        data.isEditable = true;
-      }
-      arr.push(data)
-    }
-    this.cardData = arr
-  }
-
-  saveCard(content_id:number) {
-    const arr = []
-    for(let data of this.cardData){
-      if(data.content_id === content_id){
-        data.isEditable = false;
-      }
-      arr.push(data)
-    }
-    this.cardData = arr
-    //API Call
-    localStorage.setItem('data',JSON.stringify(this.cardData))
-
-  }
-
-  addBlog() {
-    this.isAddblog = true;
-  }
-
-  saveBlog(){
-    let length = this.cardData.length;
-    
-    this.cardData.push({
-      content:this.blogdata,
-      isEditable:false,
-      content_id:(length+1)
-    })
-    //API Call
-    localStorage.setItem('data',JSON.stringify(this.cardData))
-    this.isAddblog = false;
-    this.blogdata=""
+  goToPage(route: string) {
+    this.router.navigate([route]);
   }
 }
