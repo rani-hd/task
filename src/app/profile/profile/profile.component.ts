@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  userData:any={};
+  userdata:any={};
   constructor(private auth:AuthService,private router:Router) { }
 
   ngOnInit(): void {
@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
       const user_id = this.auth.getUserId()
       for (user of data) {
         if(user.username === user_id){
-          this.userData = user
+          this.userdata = user
         }
       }
 
@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile(){
-    this.auth.signUp(this.userData).then(data=>{
+    this.auth.signUp(this.userdata).then(data=>{
       this.router.navigate(['home-page'])
     })
   }

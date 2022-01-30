@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -15,15 +13,18 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { BlogpageComponent } from './blog/blogpage/blogpage.component';
 import { ProfileComponent } from './profile/profile/profile.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDialogModule} from '@angular/material/dialog';
+import { PopUpComponent } from './pop-up/pop-up.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
-    LoginComponent,
-    SignupComponent,
     BlogpageComponent,
-    ProfileComponent
+    ProfileComponent,
+    PopUpComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -34,6 +35,8 @@ import { ProfileComponent } from './profile/profile/profile.component';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

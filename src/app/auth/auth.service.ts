@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { Observable,map } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +12,6 @@ export class AuthService {
   user_Id:string = "";
 
   setUserId(id:string){
-    debugger
     this.user_Id = id
     this.isAuthenticated = true;
   }

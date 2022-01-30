@@ -3,13 +3,13 @@
       <h2>Profile</h2>
       <form class="formBox">
         <label for="name">name</label>
-        <input required [(ngModel)]="userData.name" name="name">
+        <input required [(ngModel)]="userdata.name" name="name" />
         <label for="username">Username</label>
-        <input required [(ngModel)]="userData.username" name="username">
+        <input required [(ngModel)]="userdata.username" name="username" />
         <label for="email">email</label>
-        <input required [(ngModel)]="userData.email" name="email">
+        <input required [(ngModel)]="userdata.email" name="email" />
         <label for="password">password</label>
-        <input type="password" required [(ngModel)]="userData.password" name="password">
+        <input type="password" required [(ngModel)]="userdata.password" name="password" />
         <button class="btn btn-success" (click)="updateProfile()">Update Profile</button>
       </form>
     </div>

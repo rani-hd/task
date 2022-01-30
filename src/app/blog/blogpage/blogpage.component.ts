@@ -13,6 +13,8 @@ export class BlogpageComponent implements OnInit {
   blogdata: string = '';
   allBlogs: any = [];
   user_id: string = '';
+  blogStatus: string = 'inactive';
+  togglestatus: boolean = false;
 
   constructor(
     public coreURL: BackendService,
@@ -77,7 +79,7 @@ export class BlogpageComponent implements OnInit {
       updated_at: date,
       user_id: this.auth.getUserId(), //username
       content: this.blogdata,
-      status: 'active',
+      status: this.blogStatus,
     };
     this.coreURL.addData(data).then((res) => {
       this.isAddblog = false;
@@ -88,9 +90,19 @@ export class BlogpageComponent implements OnInit {
 
   getDate() {
     const date = new Date();
-    const newDate = `${date.getDate() + 1}-${
+    const newDate = `${date.getDate()}-${
       date.getMonth() + 1
     }-${date.getFullYear()}`;
     return newDate;
+  }
+
+  toggle() {
+    if (this.togglestatus) {
+      this.blogStatus = 'active';
+    } else {
+      this.blogStatus = 'inactive';
+    }
+
+    // console.log(this.status);
   }
 }

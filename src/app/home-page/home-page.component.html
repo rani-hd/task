@@ -6,8 +6,9 @@
       <p *ngIf="user_id === ''">No user logged In</p>
 
       <button class="btn btn-primary">Home</button>
-      <button class="btn btn-primary" (click)="goToPage('blog-page')" >My blogs</button>
-      <button class="btn btn-primary" (click)="goToPage('profile')">Profile</button>
+      <button class="btn btn-primary" (click)="openDialog()" >My blogs</button>
+      <button class="btn btn-primary" (click)="openDialogProfile()">Profile</button>
+     
     </div>
   </div>
 </div>
