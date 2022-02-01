@@ -30,7 +30,6 @@ export class BlogpageComponent implements OnInit {
   initUser() {
     let blogcheck = this.coreURL.getData().subscribe((snapshot) => {
       blogcheck.unsubscribe();
-      debugger;
       console.log(snapshot);
       const data: any = [];
       let key: any = {};
@@ -51,7 +50,7 @@ export class BlogpageComponent implements OnInit {
     const arr = [];
     for (let data of this.allBlogs) {
       if (data.id === id) {
-        data.status = 'inactive';
+        data.status = 'active';
       }
       arr.push(data);
     }
@@ -63,7 +62,7 @@ export class BlogpageComponent implements OnInit {
     let editedData = [];
     for (let data of this.allBlogs) {
       if (data.id === id) {
-        data.status = 'active';
+        data.status = 'inactive';
         editedData = data;
       }
       arr.push(data);
