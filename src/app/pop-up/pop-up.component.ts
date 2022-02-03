@@ -34,6 +34,9 @@ export class PopUpComponent implements OnInit {
         ) {
           flag = true;
           this.auth.setUserId(this.userData.username);
+         let username ="names"
+          localStorage.setItem( username ,this.userData.username);
+          console.log("logged in"+ localStorage.setItem( username ,this.userData.username));
           this.userData = {};
           this.dialogRef.close();
           // this.router.navigate(['home-page']);

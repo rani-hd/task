@@ -12,9 +12,15 @@ import { BackendService } from 'src/app/services/backend.service';
 export class HomePageComponent implements OnInit {
   user_id: string = '';
   allBlogs: any = [];
- constructor(public router: Router, private auth: AuthService,private dialogRef: MatDialog,public coreURL: BackendService,) {}
+  attribute: any;
+ 
+ constructor(public router: Router, private auth: AuthService,private dialogRef: MatDialog,public coreURL: BackendService,
+) {
+    
+  }
 
   openDialog(){
+   // this.attribute =  localStorage.getItem("names")
     this.user_id = this.auth.getUserId();
     if(this.user_id){
       this.router.navigate(['blog-page']);
@@ -24,6 +30,10 @@ export class HomePageComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.user_id = this.auth.getUserId();
+    
+     // localStorage.setgetItem( username ,this.userData.username);
+     console.log(localStorage.getItem("names"))
+   this.attribute =  localStorage.getItem("names")
       if(this.user_id){
         this.router.navigate(['blog-page']);
       }
@@ -31,6 +41,7 @@ export class HomePageComponent implements OnInit {
   }
 }
  openDialogProfile(){
+  this.attribute =  localStorage.getItem("names")
     this.user_id = this.auth.getUserId();
     if(this.user_id){
       this.router.navigate(['profile']);
@@ -40,6 +51,7 @@ export class HomePageComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.attribute =  localStorage.getItem("names")
       this.user_id = this.auth.getUserId();
       if(this.user_id){
         this.router.navigate(['profile']);
@@ -48,12 +60,19 @@ export class HomePageComponent implements OnInit {
   }
 }
   logout(){
+    window.localStorage.clear();
     this.user_id='';
     this.auth.setUserId("");
   }
+
+
   ngOnInit(): void {
+    
+    this.attribute =  localStorage.getItem("names")
     this.user_id = this.auth.getUserId();
     this.initUser();
+
+   
   }
   initUser() {
     let blogcheck = this.coreURL.getData().subscribe((snapshot) => {

@@ -7,6 +7,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 })
 export class AuthService {
   constructor(private db: AngularFirestore) {
+   
   }
   isAuthenticated:boolean=false;
   user_Id:string = "";
@@ -33,6 +34,8 @@ export class AuthService {
   getAuthStatus(){
     return this.isAuthenticated;
   }
+
+ 
 
 }
 
