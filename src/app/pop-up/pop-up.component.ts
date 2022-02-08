@@ -34,9 +34,7 @@ export class PopUpComponent implements OnInit {
         ) {
           flag = true;
           this.auth.setUserId(this.userData.username);
-         let username ="names"
-          localStorage.setItem( username ,this.userData.username);
-          console.log("logged in"+ localStorage.setItem( username ,this.userData.username));
+          localStorage.setItem('userId',JSON.stringify(this.userData.username))
           this.userData = {};
           this.dialogRef.close();
           // this.router.navigate(['home-page']);
@@ -45,7 +43,7 @@ export class PopUpComponent implements OnInit {
 
       if (flag === false) {
         console.log('Error: User not found');
-        this.isLogin=false;
+        this.isLogin = false;
         // this.router.navigate(['signup']);
       }
     });
@@ -54,7 +52,7 @@ export class PopUpComponent implements OnInit {
   signUp() {
     this.auth.signUp(this.userData).then((data) => {
       this.userData = {};
-      this.isLogin=true;
+      this.isLogin = true;
       //  this.router.navigate(['login'])
     });
   }

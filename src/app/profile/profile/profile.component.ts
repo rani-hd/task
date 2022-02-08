@@ -5,33 +5,32 @@ import { AuthService } from 'src/app/auth/auth.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  userdata:any={};
-  constructor(private auth:AuthService,private router:Router) { }
+  userdata: any = {};
+  constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.initProfile()
+    this.initProfile();
   }
 
-  initProfile(){
+  initProfile() {
     let logUser = this.auth.getUser().subscribe((data) => {
       logUser.unsubscribe();
       let user: any = {};
-      const user_id = this.auth.getUserId()
+      const user_id = this.auth.getUserId();
       for (user of data) {
-        if(user.username === user_id){
-          this.userdata = user
+        if (user.username === user_id) {
+          this.userdata = user;
         }
       }
-
     });
   }
 
-  updateProfile(){
-    this.auth.signUp(this.userdata).then(data=>{
-      this.router.navigate(['home-page'])
-    })
+  updateProfile() {
+    this.auth.signUp(this.userdata).then((data) => {
+      this.router.navigate(['home-page']);
+    });
   }
 }

@@ -5,15 +5,15 @@ import { AuthGuard } from './authguard/auth.guard';
 import { BlogpageComponent } from './blog/blogpage/blogpage.component';
 import { ProfileComponent } from './profile/profile/profile.component';
 
-
 const routes: Routes = [
-{path:'home-page',component:HomePageComponent},
-{path:'blog-page',component:BlogpageComponent,canActivate: [AuthGuard]},
-{path:'profile',component:ProfileComponent,canActivate: [AuthGuard]},
-{path:"",redirectTo:'/home-page',pathMatch:"full"}];
+  { path: 'home-page', component: HomePageComponent },
+  { path: 'blog-page', component: BlogpageComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/home-page', pathMatch: 'full' },
+];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
-export const routingComponets = [ HomePageComponent ]
+export class AppRoutingModule {}
+export const routingComponets = [HomePageComponent];

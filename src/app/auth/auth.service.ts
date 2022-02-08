@@ -1,43 +1,29 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-
-
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private db: AngularFirestore) {
-   
-  }
-  isAuthenticated:boolean=false;
-  user_Id:string = "";
+  constructor(private db: AngularFirestore) {}
+  isAuthenticated: boolean = false;
+  user_Id: string = '';
 
-  setUserId(id:string){
-    this.user_Id = id
+  setUserId(id: string) {
+    this.user_Id = id;
     this.isAuthenticated = true;
   }
-
-  getUserId(){
-    return this.user_Id||"";
+  getUserId() {
+    return this.user_Id || '';
   }
-  
-  signUp(data:any){
+  signUp(data: any) {
     const id = this.db.createId();
     const usersRef = this.db.collection('users');
-   return usersRef.doc(id).set({id:id, ...data });
+    return usersRef.doc(id).set({ id: id, ...data });
   }
-
-  getUser(){
+  getUser() {
     return this.db.collection('users').valueChanges();
   }
-
-  getAuthStatus(){
+  getAuthStatus() {
     return this.isAuthenticated;
   }
-
- 
-
 }
-
-
-

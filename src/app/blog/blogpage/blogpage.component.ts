@@ -56,7 +56,6 @@ export class BlogpageComponent implements OnInit {
     }
     this.allBlogs = arr;
   }
-
   saveCard(id: string) {
     const arr = [];
     let editedData = [];
@@ -70,7 +69,6 @@ export class BlogpageComponent implements OnInit {
     this.allBlogs = arr;
     this.coreURL.updateData(editedData);
   }
-
   createBlog() {
     const date = this.getDate();
     const data = {
@@ -86,7 +84,6 @@ export class BlogpageComponent implements OnInit {
       this.initUser();
     });
   }
-
   getDate() {
     const date = new Date();
     const newDate = `${date.getDate()}-${
@@ -94,7 +91,6 @@ export class BlogpageComponent implements OnInit {
     }-${date.getFullYear()}`;
     return newDate;
   }
-
   toggle() {
     if (this.togglestatus) {
       this.blogStatus = 'active';
