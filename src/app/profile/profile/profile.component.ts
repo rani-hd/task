@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -13,8 +14,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.initProfile();
-  }
-
+   }
   initProfile() {
     let logUser = this.auth.getUser().subscribe((data) => {
       logUser.unsubscribe();

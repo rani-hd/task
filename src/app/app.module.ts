@@ -15,6 +15,7 @@ import { ProfileComponent } from './profile/profile/profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PopUpComponent } from './pop-up/pop-up.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { PopUpComponent } from './pop-up/pop-up.component';
     provideFirestore(() => getFirestore()),
     BrowserAnimationsModule,
     MatDialogModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
