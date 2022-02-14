@@ -9,27 +9,35 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  userdata: any = {};
+  userForm: any = new FormGroup({
+    id: new FormControl(''),
+    name: new FormControl(''),
+    email: new FormControl(''),
+    username: new FormControl(''),
+    password: new FormControl(''),
+  });
+
   constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {
+    //    console.log("userForm details"+this.userForm.username);
     this.initProfile();
-   }
+  }
   initProfile() {
     let logUser = this.auth.getUser().subscribe((data) => {
       logUser.unsubscribe();
       let user: any = {};
+      console.log(Response);
       const user_id = this.auth.getUserId();
       for (user of data) {
         if (user.username === user_id) {
-          this.userdata = user;
+          this.userForm.setValue(user);
         }
       }
     });
   }
-
   updateProfile() {
-    this.auth.signUp(this.userdata).then((data) => {
+    this.auth.signUp(this.userForm.value).then((data) => {
       this.router.navigate(['home-page']);
     });
   }

@@ -50,7 +50,7 @@ export class BlogpageComponent implements OnInit {
     const arr = [];
     for (let data of this.allBlogs) {
       if (data.id === id) {
-        data.status = 'active';
+        data.isEditable = true;
       }
       arr.push(data);
     }
@@ -61,7 +61,7 @@ export class BlogpageComponent implements OnInit {
     let editedData = [];
     for (let data of this.allBlogs) {
       if (data.id === id) {
-        data.status = 'inactive';
+        data.isEditable = false;
         editedData = data;
       }
       arr.push(data);
@@ -70,8 +70,11 @@ export class BlogpageComponent implements OnInit {
     this.coreURL.updateData(editedData);
   }
   createBlog() {
+    debugger;
     const date = this.getDate();
     const data = {
+      isActive:this.togglestatus,
+      isEditable:false,
       created_at: date,
       updated_at: date,
       user_id: this.auth.getUserId(), //username
@@ -97,7 +100,20 @@ export class BlogpageComponent implements OnInit {
     } else {
       this.blogStatus = 'inactive';
     }
-
-    // console.log(this.status);
   }
+
+  toggleCard(id:string) {
+    const arr = [];
+    let editedData = [];
+    for (let data of this.allBlogs) {
+      if (data.id === id) {
+        data.status = data.isActive?"active":"inactive";
+        editedData = data;
+      }
+      arr.push(data);
+    }
+    this.allBlogs = arr;
+    this.coreURL.updateData(editedData);
+  }
+
 }

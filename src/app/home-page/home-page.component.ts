@@ -69,12 +69,12 @@ export class HomePageComponent implements OnInit {
     this.isUserLogged = false
   }
 
-  isUserLogged:boolean=false;
+  isUserLogged=false;
   ngOnInit(): void {
     const storedUser:any = localStorage.getItem('userId');
     const user = JSON.parse(storedUser)
     if(user){
-      this.auth.setUserId(storedUser);
+      this.auth.setUserId(user);
       this.user_id = user
       this.isUserLogged = true
     }
@@ -87,7 +87,9 @@ export class HomePageComponent implements OnInit {
       const data: any = [];
       let key: any = {};
       for (key of snapshot) {
-        data.push(key);
+        if(key.status === 'active'){
+          data.push(key);
+        }
       }
       this.allBlogs = data;
     });

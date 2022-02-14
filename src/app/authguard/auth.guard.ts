@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
     const storedUser:any = localStorage.getItem('userId');
     const user = JSON.parse(storedUser)
     if(user){
-      this.auth.setUserId(storedUser);
+      this.auth.setUserId(user);
     }
     if (user||this.auth.getAuthStatus()) {
       return true;
