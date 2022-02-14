@@ -20,6 +20,11 @@ export class AuthService {
     const usersRef = this.db.collection('users');
     return usersRef.doc(id).set({ id: id, ...data });
   }
+
+  updateUser(data: any) {
+    const usersRef = this.db.collection('users');
+    return usersRef.doc(data.id).set(data);
+  }
   getUser() {
     return this.db.collection('users').valueChanges();
   }

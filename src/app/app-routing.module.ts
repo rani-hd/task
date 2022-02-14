@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'blog-page', component: BlogpageComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/home-page', pathMatch: 'full' },
+  
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

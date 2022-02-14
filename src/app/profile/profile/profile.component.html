@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <h2>Profile</h2>
-    <form class="formBox" [formGroup]="userForm" (ngSubmit)="updateProfile()">
+    <form class="formBox" [formGroup]="userForm" (ngSubmit)="updateProfile(userForm)">
       <label for="name">name</label>
       <input required formControlName="name" />
       <label for="username">Username</label>

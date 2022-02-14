@@ -16,9 +16,7 @@ export class ProfileComponent implements OnInit {
     username: new FormControl(''),
     password: new FormControl(''),
   });
-
   constructor(private auth: AuthService, private router: Router) {}
-
   ngOnInit(): void {
     //    console.log("userForm details"+this.userForm.username);
     this.initProfile();
@@ -36,9 +34,12 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
-  updateProfile() {
-    this.auth.signUp(this.userForm.value).then((data) => {
+
+  updateProfile(form:FormGroup) {
+    this.auth.updateUser(form.value).then((data) => {
       this.router.navigate(['home-page']);
     });
   }
+
+ 
 }
